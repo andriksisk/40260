@@ -1,0 +1,51 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="widht=device-width, initial-scale=1.0">
+    <title>Practica Imagenes1</title>
+    <style>
+        img{
+            box-shadow: 10px 10px 20px blueviolet;
+        }
+        figure{
+            width: 400px;
+            text-align: center;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Picture</h1>
+
+        <!-- <figure> -->
+            <img src="https://picsum.photos/id/41/200/300" alt="">
+            <figcaption><h1>john</h1></figcaption>
+        <!-- </figure> -->
+    <div id="demo"></div>     
+    <script>
+        let ejemplo =document.getElementById("demo")
+        console.log(ejemplo)
+       
+
+        function imagen(id){
+            const componente= "<figure>"+
+                '<img src="https://picsum.photos/id/' + id + '/200/300" alt="x">'+
+                "<figcaption>Jonh</figcaption>"+
+                "</figure>"
+                return componente
+        }
+
+        const Picture = (id) => {
+            return `
+            <figure>
+            <img src="https://picsum.photos/id/${id}/200/300" alt="x">
+            <figcaption>Jonh</figcaption>
+            </figure>
+            `
+        }
+
+        // ejemplo.innerHTML="Hola" + imagen(1) + imagen(2)
+        ejemplo.innerHTML="Hola"+ Picture()
+    </script>
+</body>
+</html>
