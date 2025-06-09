@@ -1,0 +1,86 @@
+<html lang="mx">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        
+
+    </head>
+    <body>
+        <button aria-label="Cerrar Ventana">x</button>
+
+        <label for="u">Nombre de usuario:</label>
+        <input type="text" id="u" aria-describedby="i">
+        <p id="i">EL campo debe tener 6 caracteres alfanumericos</p>
+
+        <button aria-expanded="false" aria-controls="c" id="menu">Menú</button>
+        <nav id="c" hidden>
+            <ul>
+                <li><a href="&">inicio</a></li>
+                <li><a href="&">productos</a></li>
+                <li><a href="&">servicios</a></li>
+            </ul>
+        </nav>
+
+        <div role="tablist">
+            <button role="tab" id="tab-1" aria-selected="true" aria-controls="panel-1" title="Pestaña 1 con imagen rara">Pestaña 1</button>
+            <button role="tab" id="tab-2" aria-selected="false" aria-controls="panel-2" title="Pestaña 2 con imagen rara pero 2">Pestaña 2</button>
+        </div>
+
+        <div role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden>
+            <fieldset>Contenido de la pestaña 1
+                <img src="https://picsum.photos/id/1/100/100" alt="HOmbre en computadora" srcset="">
+            </fieldset>
+        </div>
+
+        <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+            <fieldset>Contenido de la pestaña 2
+                <img src="https://picsum.photos/id/1/100/100" alt="El mismo hombre en computadora" srcset="">
+            </fieldset>
+        </div>
+
+        <script>
+            const menu = document.getElementById("menu")
+            menu.addEventListener("click", () => {
+                let enlaces=document.getElementById("c")
+                console.log(enlaces.getAttribute("hidden"))
+                //hiden no lleva valor pero
+                //if(enlaces.getAttribute("hidden")=="")
+                //    enlaces.removeAttribute("hidden")
+                //else
+                //    enlaces.setAttribute("hidden","")
+                //enlaces.setAttribute("hidden","false")
+                //if(enlaces.)
+                //enlaces.removeAttribute("hidden")
+
+                if(enlaces.getAttributeNames().includes("hidden")){
+                    enlaces.removeAttribute("hidden")
+                    menu.setAttribute("aria-expanded","true")
+                }else{
+                    enlaces.setAttribute("hidden","")
+                    menu.setAttribute("aria-expanded", "false")
+                }
+            })
+
+            //logica para simulación de páneles
+
+            const tabs = document.querySelectorAll('[role="tab"]')
+            const panels = document.querySelectorAll('[role="tabpanel"]')
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () =>{
+                    tabs.forEach(t => 
+                    t.setAttribute('aria-selected', 'false'))
+                    panels.forEach(p => 
+                    p.setAttribute('hidden',''))
+
+                    tab.setAttribute('aria-selected','true')
+                    const targetPanelId = tab.getAttribute('aria-controls')
+                    document.getElementById(targetPanelId).removeAttribute('hidden')
+
+                })
+            })
+
+        </script>
+    </body> 
+</html>
